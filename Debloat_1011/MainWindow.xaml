@@ -1,0 +1,141 @@
+﻿<Window x:Class="Debloat_1011.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Debloat_1011"
+        mc:Ignorable="d"
+        Title="Debloater 10/11" 
+        Height="600" 
+        Width="700"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="5" x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#6c00ee"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#6c00ee"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Grid Background="#121212">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Grid.RowSpan="2">
+            <Label Foreground="#6c00ee" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 40 0 0" FontSize="25" FontWeight="Bold">Windows 10</Label>
+            <Button Background="#292929" FontWeight="Bold" BorderBrush="#292929" Foreground="White" x:Name="btn_MSapps" Height="50" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="70,120,0,0" FontSize="17" Click="btn_MSapps_click">Remove MS Store Bloat</Button>
+            <Button Background="#292929" FontWeight="Bold" BorderBrush="#292929" Foreground="White" x:Name="btn_AllBloat" Height="50" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="70,200,0,0" FontSize="17" Click="btn_AllBloat_click">Remove All Bloat</Button>
+            <Label Foreground="#6c00ee" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="40 255 0 0" FontWeight="Bold" FontSize="14">(Includes Mail, Onedrive and MSedge)</Label>
+        </Grid>
+
+
+        <Grid Grid.Row="2" Grid.RowSpan="2">
+            <Label Foreground="#6c00ee" HorizontalAlignment="Center" FontSize="24" FontWeight="Bold">Install Browser</Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="95*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="95*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="95*"/>
+                    <ColumnDefinition Width="30.435"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <Button Background="#292929" FontWeight="Bold" Foreground="White" BorderBrush="#292929" x:Name="btn_brave" Grid.Column="1" Grid.Row="1" FontSize="18" Click="btn_brave_click">Brave</Button>
+                <Button Background="#292929" FontWeight="Bold" Foreground="White" BorderBrush="#292929" x:Name="btn_firefox" Grid.Column="3" Grid.Row="1" FontSize="18" Click="btn_firefox_click">Firefox</Button>
+                <Button Background="#292929" FontWeight="Bold" Foreground="White" BorderBrush="#292929" x:Name="btn_waterfox" Grid.Column="5" Grid.Row="1" FontSize="18" Click="btn_waterfox_click">Waterfox</Button>
+                <Button Background="#292929" FontWeight="Bold" Foreground="White" BorderBrush="#292929" x:Name="btn_opera" Grid.Column="1" Grid.Row="3" FontSize="18" Click="btn_opera_click">Opera</Button>
+                <Button Background="#292929" FontWeight="Bold" Foreground="White" BorderBrush="#292929" x:Name="btn_operaGX" Grid.Column="3" Grid.Row="3" FontSize="18" Click="btn_operaGX_click">Opera GX</Button>
+                <Button Background="#292929" FontWeight="Bold" Foreground="White" BorderBrush="#292929" x:Name="btn_chrome" Grid.Column="5" Grid.Row="3" FontSize="18" Click="btn_chrome_click">Chrome</Button>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="1">
+            <Label Foreground="#6c00ee" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 40 0 0" FontSize="25" FontWeight="Bold">Windows 11</Label>
+            <Button Background="#292929" FontWeight="Bold" Foreground="White" BorderBrush="#292929" x:Name="btn_MSapps11" Height="50" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="70,120,0,0" FontSize="17" Click="btn_MSapps11_click">Remove MS Store Bloat</Button>
+            <Button Background="#292929" FontWeight="Bold" Foreground="White" BorderBrush="#292929" x:Name="btn_AllBloat11" Height="50" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="70,200,0,0" FontSize="17" Click="btn_AllBloat11_click">Remove All Bloat</Button>
+
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.RowSpan="2" Grid.Column="2">
+            <Button Background="#292929" FontWeight="Bold" Foreground="White" BorderBrush="#292929" x:Name="btn_activate" Height="40" Width="300" VerticalAlignment="top" Margin="0 10 0 0" Click="btn_activate_click" ToolTip="Activate this copy of windows for free">Activate Windows</Button>
+            <Button Background="#292929" FontWeight="Bold" Foreground="White" BorderBrush="#292929" Height="40" Width="300" VerticalAlignment="top" Margin="0 70 0 0">The Download Library (comming soon)</Button>
+            <Button Background="#292929" FontWeight="Bold" Foreground="White" BorderBrush="#292929" x:Name="btn_CTTtool" Height="40" Width="300" VerticalAlignment="top" Margin="0 130 0 0" Click="btn_CTTtool_click">Winutil (ChrisTitusTech)</Button>
+        </Grid>
+
+        <Grid Grid.Row="5" Grid.ColumnSpan="2">
+            <ProgressBar Foreground="#6c00ee" x:Name="Progbar" Height="30" Width="600" VerticalAlignment="Center" Maximum="100"></ProgressBar>
+        </Grid>
+
+    </Grid>
+</Window>
